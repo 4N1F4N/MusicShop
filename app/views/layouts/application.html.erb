@@ -14,6 +14,13 @@
       <a href="<%= main_path %>">Главная страница</a>
       <a href="<%= new_product_path %>">Новый продукт</a>
       <a href="<%= products_path %>">Все продукты</a>
+      <% if session[:profile_id] %>
+          <a href="<%= profile_path(Profile.find_by(id: session[:profile_id])) %>">Аккаунт</a>
+          <a href="<%= logout_path %>">Выйти</a>
+      <% else %>
+          <a href="<%= login_path %>">Войти</a>
+          <a href="<%= signup_path %>">Создать</a>
+      <% end %>
     </div>
     <%= yield %>
   </body>
