@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
   get "/", to: "pages#main", as: "main"
 
+
+  scope "/cart" do
+    get "/", to: "carts#index", as: "cart"
+
+    post "/add_product", to: "carts#add_product", as: "add_product_to_cart"
+    post "/delete_product", to: "carts#delete_product", as: "delete_product_from_cart"
+  end
+
   scope "/profile" do
     get "/login", to: "profiles#login", as: "login"
     post "/login", to: "profiles#check"

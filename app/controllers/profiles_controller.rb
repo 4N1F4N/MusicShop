@@ -5,8 +5,11 @@ class ProfilesController < ApplicationController
 
   def check
     profile = Profile.find_by(name:login_params[:name])
-    if profile.authenticate(login_params[:password])
+    if profile && profile.authenticate(login_params[:password])
       session[:profile_id] = profile.id
+      session[:cart_id] = profile.cart.id
+    else
+      redirect_to login_path
     end
     redirect_to profile_path(profile)
   end
@@ -19,6 +22,7 @@ class ProfilesController < ApplicationController
     profile = Profile.new(signup_params)
     if (profile.save)
       session[:profile_id] = profile.id
+      session[:cart_id] = profile.cart.id
       redirect_to profile_path(profile)
     end
   end
@@ -28,7 +32,10 @@ class ProfilesController < ApplicationController
   end
 
   def logout
-    session.delete(:profile_id) if session[:profile_id]
+    if session[:profile_id]
+      session.delete(:profile_id)
+      session.delete(:cart_id)
+    end
     redirect_to "/"
   end
 

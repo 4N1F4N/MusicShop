@@ -16,6 +16,7 @@
       <a href="<%= products_path %>">Все продукты</a>
       <% if session[:profile_id] %>
           <a href="<%= profile_path(Profile.find_by(id: session[:profile_id])) %>">Аккаунт</a>
+          <a href="<%= cart_path %>">Корзина</a>
           <a href="<%= logout_path %>">Выйти</a>
       <% else %>
           <a href="<%= login_path %>">Войти</a>
