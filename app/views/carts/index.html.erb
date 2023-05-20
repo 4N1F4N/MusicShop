@@ -1,5 +1,5 @@
 <% 
-  if @products 
+  if !@products.empty? 
     @products.each do |product|
       %>
       <div>
@@ -13,8 +13,12 @@
       </div>
       <%
     end
-  end
-  if @products.empty?
+    %>
+    <form action="<%= new_order_path %>" accept-charset="UTF-8" method="post">
+      <input type="submit" name="commit" value="Оформить заказ">
+    </form>
+    <%
+  else
     %><h1 style="text-align: center">Ваша корзина пустая</h1><%
   end
 %>

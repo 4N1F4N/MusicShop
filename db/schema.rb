@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_17_192216) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_18_170216) do
   create_table "carts", force: :cascade do |t|
     t.integer "profile_id"
     t.datetime "created_at", null: false
@@ -23,8 +23,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_17_192216) do
     t.integer "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "order_id"
     t.index ["cart_id"], name: "index_ordered_products_on_cart_id"
+    t.index ["order_id"], name: "index_ordered_products_on_order_id"
     t.index ["product_id"], name: "index_ordered_products_on_product_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string "status"
+    t.integer "profile_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["profile_id"], name: "index_orders_on_profile_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -35,11 +45,20 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_17_192216) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "profile_statuses", force: :cascade do |t|
+    t.string "title"
+    t.integer "access_level"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "profiles", force: :cascade do |t|
     t.string "name"
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "profile_statuses_id"
+    t.index ["profile_statuses_id"], name: "index_profiles_on_profile_statuses_id"
   end
 
 end
