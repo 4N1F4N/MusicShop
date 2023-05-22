@@ -1,0 +1,9 @@
+<a>Status: <%= @order.order_status.last.title %></a>
+<a>Id: <%= @order.id %></a>
+<% @order.ordered_product.each do |product|%>
+  <div>
+    <% select_product = Product.find_by(id: product.product_id) %>
+    <a><%= select_product.title %></a>
+    <a><%= select_product.price %></a>
+  </div>
+<% end %>

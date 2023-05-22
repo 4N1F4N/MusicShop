@@ -10,12 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_18_170216) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_22_203059) do
   create_table "carts", force: :cascade do |t|
     t.integer "profile_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["profile_id"], name: "index_carts_on_profile_id"
+  end
+
+  create_table "order_statuses", force: :cascade do |t|
+    t.string "title"
+    t.integer "status_id"
+    t.integer "order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_order_statuses_on_order_id"
   end
 
   create_table "ordered_products", force: :cascade do |t|
@@ -30,7 +39,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_18_170216) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.string "status"
     t.integer "profile_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
