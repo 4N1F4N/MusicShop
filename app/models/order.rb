@@ -5,6 +5,8 @@ class Order < ApplicationRecord
 
   after_create :create_status
 
+  after_destroy :destoy_ordered_products
+
   def update_status(id)
     status = OrderStatus.new(status_id: id, order_id: self.id)
     status.update_status
@@ -16,5 +18,11 @@ class Order < ApplicationRecord
       status = OrderStatus.new(status_id: 1, order_id: self.id)
       status.update_status
       status.save
+    end
+
+    def destoy_ordered_products
+      OrderedProduct.where(order_id: self.id).all.each do |product|
+        product.destroy
+      end
     end
 end

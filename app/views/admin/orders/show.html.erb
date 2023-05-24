@@ -1,9 +1,18 @@
-<a>Status: <%= @order.order_status.last.title %></a>
-<a>Id: <%= @order.id %></a>
+<a>Статус: <%= @order.order_status.last.title %></a>
+<a>Создан: <%= @order.created_at%></a>
+<a>Последнее изменение: <%= @order.updated_at %></a>
 <% @order.ordered_product.each do |product|%>
   <div>
     <% select_product = Product.find_by(id: product.product_id) %>
-    <a><%= select_product.title %></a>
-    <a><%= select_product.price %></a>
+    <a>Название продукта: <%= select_product.title %></a>
+    <a>Цена: <%= select_product.price %></a>
+  </div>
+<% end %>
+<br>
+<% @order.order_status.each do |status|%>
+  <div>
+    <a>Название статуса: <%= status.title %></a>
+    <a>Время: <%= status.created_at %></a>
+    <a>ID: <%= status.id %></a>
   </div>
 <% end %>

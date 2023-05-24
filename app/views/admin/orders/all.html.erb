@@ -4,6 +4,7 @@
       <a>Status: <%= order.order_status.last.title %></a>
       <a>Id: <%= order.id %></a>
       <a href="<%= admin_order_path(order.id) %>">Подробная информация</a>
+      <a href="<%= admin_order_destroy_path(order.id) %>">Удалить заказ</a>
     </li>
   <% end %>
 </ul>

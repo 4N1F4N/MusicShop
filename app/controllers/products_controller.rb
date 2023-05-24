@@ -1,7 +1,6 @@
 class ProductsController < ApplicationController
-  def index
+  def all
     @products = Product.all
-
   end
 
   def show
@@ -13,11 +12,10 @@ class ProductsController < ApplicationController
   end
 
   def create
-    @product = Product.new(title: (0...20).map { ('a'..'z').to_a[rand(26)] }.join, price: rand(1.0..10.0).round(2), count: rand(1..5))
-
+    @product = Product.new(product_params)
     @product.save
 
-    #redirect_to new_product_path
+    redirect_to new_product_path
   end
 
   def destroy
@@ -25,4 +23,9 @@ class ProductsController < ApplicationController
     @product.destroy
     redirect_to products_path
   end
+
+  private
+    def product_params
+      params.require(:product).permit(:title, :price)
+    end
 end

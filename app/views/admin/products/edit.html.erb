@@ -1,0 +1,6 @@
+<form action = "<%= admin_edit_product_path %>" method = 'post'>
+  <h5>Изменить продукт</h5>
+  <input name="product[title]" value="<%= @product.title %>" placeholder="Наименование">
+  <input name="product[price]" value="<%= @product.price %>" placeholder="Цена">
+  <input type="submit" name="submit" value="Изменить продукт">
+</form>

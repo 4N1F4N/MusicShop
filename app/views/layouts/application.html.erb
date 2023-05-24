@@ -3,6 +3,7 @@
   <head>
     <title>MusicShop</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,19 +11,27 @@
   </head>
 
   <body>
-    <div style="text-align: center">
-      <a href="<%= main_path %>">Главная страница</a>
-      <a href="<%= new_product_path %>">Новый продукт</a>
-      <a href="<%= products_path %>">Все продукты</a>
-      <a href="<%= admin_all_orders_path %>">Заказы</a>
-      <% if session[:profile_id] %>
-          <a href="<%= profile_path(Profile.find_by(id: session[:profile_id])) %>">Аккаунт</a>
-          <a href="<%= cart_path %>">Корзина</a>
-          <a href="<%= logout_path %>">Выйти</a>
-      <% else %>
-          <a href="<%= login_path %>">Войти</a>
-          <a href="<%= signup_path %>">Создать</a>
-      <% end %>
+    <div class="container">
+      <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+        <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+          <li><a class="nav-link px-2" href="<%= main_path %>">Главная страница</a></li>
+          <li><a class="nav-link px-2" href="<%= products_path %>">Все продукты</a></li>
+          <% if session[:profile_id] %>
+            <li><a class="nav-link px-2" href="<%= profile_path(Profile.find_by(id: session[:profile_id])) %>">Аккаунт</a></li>
+            <li><a class="nav-link px-2" href="<%= cart_path %>">Корзина</a></li>
+            <li><a class="nav-link px-2" href="<%= logout_path %>">Выйти</a></li>
+            <% if Profile.find(session[:profile_id]).admin? %>
+              <li><a class="nav-link px-2" href="<%= admin_links_path %>">Админская панель</a></li>
+            <% end %>
+            <% if Profile.find(session[:profile_id]).techstaff? %>
+              <li><a class="nav-link px-2" href="<%= techstaff_links_path %>">Техническая панель</a></li>
+            <% end %>
+          <% else %>
+            <li><a class="nav-link px-2" href="<%= login_path %>">Войти</a></li>
+            <li> <a class="nav-link px-2" href="<%= signup_path %>">Создать</a></li>
+          <% end %>
+        </ul>
+      </header>
     </div>
     <%= yield %>
   </body>

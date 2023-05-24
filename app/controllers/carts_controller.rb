@@ -12,6 +12,7 @@ class CartsController < ApplicationController
   def add_product
     product = OrderedProduct.new(product_params)
     product.save
+    redirect_to products_path
   end
 
   def delete_product

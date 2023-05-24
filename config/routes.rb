@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get "/", to: "pages#main", as: "main"
-
+  get "/admin_links", to: "pages#admin_links", as: "admin_links"
+  get "/techstaff_links", to: "pages#techstaff_links", as: "techstaff_links"
 
   scope "/cart" do
     get "/", to: "carts#index", as: "cart"
@@ -25,10 +26,7 @@ Rails.application.routes.draw do
   end
 
   scope "/products" do
-    get "/", to: "products#index", as: "products"
-    post "/", to: "products#create"
-
-    get "/new", to: "products#new", as: "new_product"
+    get "/", to: "products#all", as: "products"
 
     get "/:id", to: "products#show", as: "product"
     get "/:id/delete", to: "products#destroy", as: "delete_product"
@@ -37,19 +35,37 @@ Rails.application.routes.draw do
   namespace :admin do
     scope "/profiles" do
       get "/all", to: "profiles#all", as: "all_profiles"
+
       get "/:id", to: "profiles#show", as: "profile"
+      get "/:id/block", to: "profiles#block", as: "profile_block"
     end
+
     scope "/orders" do 
       get "/all", to: "orders#all", as: "all_orders"
+
       get "/:id", to: "orders#show", as: "order"
+      get "/:id/delete", to: "orders#destroy", as: "order_destroy"
+    end
+
+    scope "/products" do
+      get "/all", to: "products#all", as: "all_products"
+
+      get "/new", to: "products#new", as: "new_product"
+      post "/new", to: "products#create"
+
+      get "/:id/edit", to: "products#edit", as: "edit_product"
+      post "/:id/edit", to: "products#change"
+      get "/:id/delete", to: "products#destroy", as: "delete_product"
     end
   end
 
   namespace :techstaff do
     scope "/orders" do 
       get "/all", to: "orders#all", as: "all_orders"
+
       get "/:id", to: "orders#show", as: "order"
+      get "/:id/edit", to: "orders#edit", as: "edit_order"
+      post "/:id/edit", to: "orders#change"
     end
   end
-  
 end

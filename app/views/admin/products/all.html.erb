@@ -1,0 +1,14 @@
+      <ul>
+  <% @products.each do |product| %>
+    <li>
+      <a>Name: <%= product.title %></a>
+      <a>Price: <%= product.price %></a>
+      <form action="<%= admin_edit_product_path(product)%>" accept-charset="UTF-8" method="get">
+        <div><input type="submit" name="commit" value="Редактировать продукт"></div>
+      </form>
+      <form action="<%= admin_delete_product_path(product)%>" accept-charset="UTF-8" method="post">
+        <div><input type="submit" name="commit" value="Удалить продукт"></div>
+      </form>
+    </li>
+  <% end %>
+</ul>

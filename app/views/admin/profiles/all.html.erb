@@ -2,6 +2,7 @@
   <% @profiles.each do |profile| %>
     <li>
       <a>Name: <%= profile.name %></a>
+      <a href="<%= admin_profile_path(profile.id) %>">Подробная информация</a>
     </li>
   <% end %>
 </ul>

@@ -7,3 +7,10 @@
     <a><%= select_product.price %></a>
   </div>
 <% end %>
+<% @order.order_status.each do |status|%>
+  <div>
+    <a>Название статуса: <%= status.title %></a>
+    <a>Время: <%= status.created_at %></a>
+    <a>ID: <%= status.id %></a>
+  </div>
+<% end %>
