@@ -1,7 +1,7 @@
 <ul>
   <% @orders.each do |order| %>
     <li>
-      <a>Status: <%= order.order_status.last.title %></a>
+      <a>Статус: <%= order.order_status.last.title %></a>
       <a>Id: <%= order.id %></a>
       <a href="<%= techstaff_order_path(order.id) %>">Подробная информация</a>
       <a href="<%= techstaff_edit_order_path(order.id) %>">Изменить</a>

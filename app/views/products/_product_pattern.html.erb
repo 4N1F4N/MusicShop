@@ -1,0 +1,17 @@
+<div class="card">
+  <div class="card-body">
+    <h2 class="card-title"><%= product.title %></h2>
+    <h4 class="card-text">Цена: <%= product.price %>р.</h4>
+    <% if session[:profile_id]%>
+      <% if !Profile.find(session[:profile_id]).cart.ordered_product.find_by(product_id: product.id) %>
+        <form action="<%= add_product_to_cart_path %>" accept-charset="UTF-8" method="post">
+          <input hidden name="product[cart_id]" value="<%= session[:cart_id] %>">
+          <input hidden name="product[product_id]" value="<%= product.id%>">
+          <input type="submit" name="commit" class="btn btn-primary" value="Добавить в корзину">
+        </form>
+      <% else %>
+        <h5 class="cart-text text-success">Уже в корзине</h5>
+      <% end %>
+    <% end %>
+  </div>
+</div>

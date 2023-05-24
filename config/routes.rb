@@ -44,7 +44,7 @@ Rails.application.routes.draw do
       get "/all", to: "orders#all", as: "all_orders"
 
       get "/:id", to: "orders#show", as: "order"
-      get "/:id/delete", to: "orders#destroy", as: "order_destroy"
+      get "/:id/cancelled", to: "orders#cancelled", as: "order_cancelled"
     end
 
     scope "/products" do
@@ -55,7 +55,7 @@ Rails.application.routes.draw do
 
       get "/:id/edit", to: "products#edit", as: "edit_product"
       post "/:id/edit", to: "products#change"
-      get "/:id/delete", to: "products#destroy", as: "delete_product"
+      post "/:id/delete", to: "products#destroy", as: "delete_product"
     end
   end
 

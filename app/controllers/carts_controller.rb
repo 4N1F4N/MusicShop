@@ -1,6 +1,6 @@
 class CartsController < ApplicationController
   def index
-    #redirect_to "/" if check_cart
+    redirect_to "/" if check_cart
 
     @products = Array.new
 
@@ -27,6 +27,6 @@ class CartsController < ApplicationController
     end
 
     def check_cart
-      session[:profile_id] && Cart.find_by(profile_id: session[:profile_id])
+      !session[:profile_id] || !Cart.find_by(profile_id: session[:profile_id])
     end
 end

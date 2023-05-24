@@ -10,9 +10,9 @@ class Admin::ProductsController < ApplicationController
   end
 
   def create
-    Product.create(propucts_params)
+    Product.create(product_params)
 
-    redirect_to admin_all_products_path
+    redirect_to admin_new_product_path
   end
 
   def change

@@ -9,8 +9,8 @@ class Admin::OrdersController < ApplicationController
     @order = Order.find(params[:id])
   end
 
-  def destroy
-    Order.find(params[:id]).destroy
+  def cancelled
+    Order.find(params[:id]).update_status(0)
 
     redirect_to admin_all_orders_path
   end
