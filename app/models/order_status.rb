@@ -28,7 +28,7 @@ class OrderStatus < ApplicationRecord
     elsif self.status_id == 3
       self.title = "Собран"
     elsif self.status_id == 4
-      self.title = "Отправлен"
+      self.title = "Готов к выдаче"
     elsif self.status_id == 5
       self.title = "Получен"
     end   

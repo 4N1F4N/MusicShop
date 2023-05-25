@@ -1,0 +1,11 @@
+<div class="card">
+  <div class="card-body">
+    <h2 class="card-title"><%= product.title %></h2>
+    <h4 class="card-text">Цена: <%= product.price %>р.</h4>
+      <form action="<%= delete_product_from_cart_path %>" accept-charset="UTF-8" method="post">
+        <input hidden name="product[cart_id]" value="<%= session[:cart_id] %>">
+        <input hidden name="product[product_id]" value="<%= product.id%>">
+        <input type="submit" name="commit" class="btn btn-primary" value="Удалить из корзины">
+      </form>
+  </div>
+</div>

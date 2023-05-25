@@ -1,1 +1,20 @@
-<p><%= @name %></p>
+<h1><%= @profile.name %></h1>
+<% if @profile.admin? %>
+  <a class="nav-link px-2" href="<%= admin_links_path %>">Админская панель</a>
+<% end %>
+<% if @profile.techstaff? %>
+  <a class="nav-link px-2" href="<%= techstaff_links_path %>">Техническая панель</a>
+<% end %>
+
+<ul>
+  <% @orders.each do |order| %>
+    <li>
+      <a>Статус: <%= order.order_status.last.title %></a>
+      <a>Id: <%= order.id %></a>
+      <a href="<%= profile_order_path(order.id) %>">Подробная информация</a>
+      <% if order.order_status.last.can_pay %>
+        <a href="<%= pay_order_path(order.id) %>">Оплатить заказ</a>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

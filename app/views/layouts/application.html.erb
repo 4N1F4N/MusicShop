@@ -12,10 +12,11 @@
 
   <body>
     <div class="container">
-      <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+      <!--header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
           <li><a class="nav-link px-2" href="<%= main_path %>">Главная страница</a></li>
-          <li><a class="nav-link px-2" href="<%= products_path %>">Все продукты</a></li>
+          
+
           <% if session[:profile_id] %>
             <li><a class="nav-link px-2" href="<%= profile_path(Profile.find_by(id: session[:profile_id])) %>">Аккаунт</a></li>
             <li><a class="nav-link px-2" href="<%= cart_path %>">Корзина</a></li>
@@ -31,7 +32,39 @@
             <li> <a class="nav-link px-2" href="<%= signup_path %>">Создать</a></li>
           <% end %>
         </ul>
+        <ul class="dropdown-menu">
+            <li><h6 class="dropdown-header">Dropdown header</h6></li>
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+          </ul>
+      </header-->
+      
+      <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+        
+        <div class="col-md-3 mb-2 mb-md-0">
+          <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
+            <svg class="bi" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
+          </a>
+        </div>
+
+        <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+          <li><a href="<%= main_path %>" class="nav-link px-2">Главная страница</a></li>
+          <li><a href="#" class="nav-link px-2">Поиск</a></li>
+          <li><a href="#" class="nav-link px-2">О сайте</a></li>
+        </ul>
+
+        <div class="col-md-3 text-end">
+          <% if session[:profile_id] %>
+            <a href="<%= profile_path %>" class="btn btn-outline-primary me-2">Профиль</a>
+            <a href="<%= cart_path %>" class="btn btn-primary me-2">Корзина</a>
+            <a href="<%= logout_path %>" class="btn btn-primary">Выйти</a>
+          <% else %>
+            <a href="<%= login_path %>" class="btn btn-outline-primary me-2">Войти</a>
+            <a href="<%= signup_path %>" class="btn btn-primary">Создать</a>
+          <% end %>
+        </div>
       </header>
+
     </div>
     <%= yield %>
   </body>

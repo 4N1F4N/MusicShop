@@ -1,4 +1,26 @@
 class ProfilesController < ApplicationController
+  before_action :check_profile, only: [:order, :show]
+
+  def show
+    @profile = Profile.find(session[:profile_id])
+    @orders = @profile.order.all.reverse
+  end
+
+  def order 
+    @order = Order.find(params[:id])
+  end
+
+  def pay
+
+  end
+
+  def pay_order
+    status = OrderStatus.where(order_id: params[:id]).last
+    Order.find(params[:id]).update_status(status.status_id + 1) if status.can_pay
+
+    redirect_to profile_path
+  end
+
   def login
 
   end
@@ -27,10 +49,6 @@ class ProfilesController < ApplicationController
     end
   end
 
-  def show
-    @name = Profile.find_by(id: params[:id]).name
-  end
-
   def logout
     if session[:profile_id]
       session.delete(:profile_id)
@@ -48,7 +66,7 @@ class ProfilesController < ApplicationController
       params.require(:signup).permit(:name, :password)
     end
 
-    def current_user
-      Profile.find_by(id: session[:profile_id])
+    def check_profile
+      redirect_to "/" if !session[:profile_id]
     end
 end

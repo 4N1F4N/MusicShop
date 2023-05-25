@@ -1,7 +1,7 @@
 class CartsController < ApplicationController
-  def index
-    redirect_to "/" if check_cart
+  before_action :check_cart
 
+  def index
     @products = Array.new
 
     Profile.find_by(id:session[:profile_id]).cart.ordered_product.each do |product|
@@ -12,7 +12,7 @@ class CartsController < ApplicationController
   def add_product
     product = OrderedProduct.new(product_params)
     product.save
-    redirect_to products_path
+    redirect_to main_path
   end
 
   def delete_product
@@ -27,6 +27,6 @@ class CartsController < ApplicationController
     end
 
     def check_cart
-      !session[:profile_id] || !Cart.find_by(profile_id: session[:profile_id])
+      redirect_to "/" if !session[:profile_id] || !Cart.find_by(profile_id: session[:profile_id])
     end
 end

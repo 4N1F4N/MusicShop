@@ -5,6 +5,10 @@ class PagesController < ApplicationController
     
   end
 
+  def main
+    @products = Product.all
+  end
+
   private
     def check_admin
       redirect_to "/" if !session[:profile_id] || !Profile.find(session[:profile_id]).admin?

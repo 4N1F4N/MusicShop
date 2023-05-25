@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   end
 
   scope "/profile" do
+    get "/", to: "profiles#show", as: "profile"
+    
     get "/login", to: "profiles#login", as: "login"
     post "/login", to: "profiles#check"
     
@@ -22,7 +24,10 @@ Rails.application.routes.draw do
     post "/signup", to: "profiles#create"
     get "/logout", to: "profiles#logout", as: "logout"
 
-    get "/:id", to: "profiles#show", as: "profile"
+    get "/order/:id/pay", to: "profiles#pay", as: "pay_order"
+    post "/order/:id/pay", to: "profiles#pay_order"
+
+    get "/order/:id", to: "profiles#order", as: "profile_order"
   end
 
   scope "/products" do

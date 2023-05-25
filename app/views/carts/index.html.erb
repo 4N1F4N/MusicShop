@@ -1,26 +1,14 @@
-<% 
-  if !@products.empty? 
-    @products.each do |product|
-      %>
-      <div>
-        <a>Имя: <%= product.title %> </a>
-        <a>Цена: <%= product.price %></a>
-        <form action="<%= delete_product_from_cart_path %>" accept-charset="UTF-8" method="post">
-          <input hidden name="product[cart_id]" value="<%= session[:cart_id] %>">
-          <input hidden name="product[product_id]" value="<%= product.id%>">
-          <input type="submit" name="commit" value="Удалить продукт">
-        </form>
-      </div>
-      <%
-    end
-    %>
-    <form action="<%= new_order_path %>" accept-charset="UTF-8" method="post">
-      <input type="submit" name="commit" value="Оформить заказ">
-    </form>
-    <%
-  else
-    %><h1 style="text-align: center">Ваша корзина пустая</h1><%
-  end
-%>
+<% if !@products.empty? %>
+  <% @products.each do |product| %>
+    <div class="col-4">
+      <%= render partial: "products/product_order_pattern", locals: {product: product} %>
+    </div>
+    <% end %>
+  <form action="<%= new_order_path %>" accept-charset="UTF-8" method="post">
+    <input type="submit" name="commit" class="btn btn-success" value="Оформить заказ">
+  </form>
+  <% else %>
+  <h1 style="text-align: center">Ваша корзина пустая</h1>
+<% end %>
 
 
