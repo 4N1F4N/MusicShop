@@ -1,5 +1,19 @@
-<select class="form-select" name="product[tag_id]">
-  <% Tag.all.each do |tag|%>
-    <option value="<%= tag.id %>"><%= tag.title %></option>
+<form action = "<%= search_path %>" method = 'get'>
+  <select class="form-select" name="tag_id">
+    <option <% if @tag_id == 0 %>selected<% end %> value="">Любые</option>
+    <% Tag.all.each do |tag|%>
+      <option <% if @tag_id == tag.id %>selected<% end %> value="<%= tag.id %>"><%= tag.title %></option>
+    <% end %>
+  </select>
+  <input type="submit" name="commit" value="Поиск">
+</form>
+
+<div class="container justify-content-md-center">
+  <div class="row">
+  <% @products.each do |product| %>
+    <div class="col-4">
+      <%= render partial: "products/product_pattern", locals: {product: product} %>
+    </div>
   <% end %>
-</select>
+  </div>
+</div>
