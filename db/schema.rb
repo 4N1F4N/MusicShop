@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_22_203059) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_25_135603) do
   create_table "carts", force: :cascade do |t|
     t.integer "profile_id"
     t.datetime "created_at", null: false
@@ -51,6 +51,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_22_203059) do
     t.integer "count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "tag_id"
+    t.index ["tag_id"], name: "index_products_on_tag_id"
   end
 
   create_table "profile_statuses", force: :cascade do |t|
@@ -67,6 +69,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_22_203059) do
     t.datetime "updated_at", null: false
     t.integer "profile_statuses_id"
     t.index ["profile_statuses_id"], name: "index_profiles_on_profile_statuses_id"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

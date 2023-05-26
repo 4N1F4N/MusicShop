@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   get "/", to: "pages#main", as: "main"
   get "/admin_links", to: "pages#admin_links", as: "admin_links"
   get "/techstaff_links", to: "pages#techstaff_links", as: "techstaff_links"
+  get "/search", to: "pages#search", as: "search"
+  get "/about", to: "pages#about", as: "about"
 
   scope "/cart" do
     get "/", to: "carts#index", as: "cart"
@@ -31,8 +33,6 @@ Rails.application.routes.draw do
   end
 
   scope "/products" do
-    get "/", to: "products#all", as: "products"
-
     get "/:id", to: "products#show", as: "product"
     get "/:id/delete", to: "products#destroy", as: "delete_product"
   end
@@ -61,6 +61,17 @@ Rails.application.routes.draw do
       get "/:id/edit", to: "products#edit", as: "edit_product"
       post "/:id/edit", to: "products#change"
       post "/:id/delete", to: "products#destroy", as: "delete_product"
+    end
+    
+    scope "/tags" do
+      get "/all", to: "tags#all", as: "all_tags"
+
+      get "/new", to: "tags#new", as: "new_tag"
+      post "/new", to: "tags#create"
+
+      get "/:id/edit", to: "tags#edit", as: "edit_tag"
+      post "/:id/edit", to: "tags#change"
+      post "/:id/delete", to: "tags#destroy", as: "delete_tag"
     end
   end
 

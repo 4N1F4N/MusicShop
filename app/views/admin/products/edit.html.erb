@@ -2,5 +2,10 @@
   <h5>Изменить продукт</h5>
   <input name="product[title]" value="<%= @product.title %>" placeholder="Наименование">
   <input name="product[price]" value="<%= @product.price %>" placeholder="Цена">
+  <select class="form-select" name="product[tag_id]">
+    <% Tag.all.each do |tag|%>
+      <option <% if tag.id == @product.tag_id %>selected<% end %> value="<%= tag.id %>"> <%= tag.title %></option>
+    <% end %>
+  </select>
   <input type="submit" name="submit" value="Изменить продукт">
 </form>

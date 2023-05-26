@@ -1,8 +1,9 @@
       <ul>
   <% @products.each do |product| %>
     <li>
-      <a>Name: <%= product.title %></a>
-      <a>Price: <%= product.price %></a>
+      <a>Имя: <%= product.title %></a>
+      <a>Цена: <%= product.price %></a>
+      <a>Каталог: <%= Tag.find(product.tag_id).title %></a>
       <form action="<%= admin_edit_product_path(product)%>" accept-charset="UTF-8" method="get">
         <div><input type="submit" name="commit" value="Редактировать продукт"></div>
       </form>

@@ -1,0 +1,5 @@
+<select class="form-select" name="product[tag_id]">
+  <% Tag.all.each do |tag|%>
+    <option value="<%= tag.id %>"><%= tag.title %></option>
+  <% end %>
+</select>

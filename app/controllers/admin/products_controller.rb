@@ -3,6 +3,13 @@ class Admin::ProductsController < ApplicationController
 
   def all
     @products = Product.all
+
+    @products.each do |product|
+      if !product.tag_id
+        product.tag_id = 1
+        product.save
+      end
+    end
   end
 
   def edit
@@ -12,7 +19,7 @@ class Admin::ProductsController < ApplicationController
   def create
     Product.create(product_params)
 
-    redirect_to admin_new_product_path
+    redirect_to admin_all_products_path
   end
 
   def change
@@ -35,6 +42,6 @@ class Admin::ProductsController < ApplicationController
     end
 
     def product_params
-      params.require(:product).permit(:title, :price)
+      params.require(:product).permit(:title, :price, :tag_id)
     end
 end
