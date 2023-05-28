@@ -12,13 +12,13 @@ class CartsController < ApplicationController
   def add_product
     product = OrderedProduct.new(product_params)
     product.save
-    redirect_to main_path
+    redirect_back(fallback_location: main_path)
   end
 
   def delete_product
     product = OrderedProduct.find_by(cart_id: product_params[:cart_id], product_id: product_params[:product_id])
     product.destroy
-    redirect_to cart_path
+    redirect_back(fallback_location: main_path)
   end
 
   private

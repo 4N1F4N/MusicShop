@@ -1,0 +1,19 @@
+<h1>Товары:</h1>
+<% order.ordered_product.each do |product|%>
+  <% select_product = Product.find_by(id: product.product_id) %>
+  <div class="card">
+    <div class="card-body">
+      <h2 class="card-title">Название товара: <%= select_product.title %> Цена: <%= select_product.price %></h2>
+      <h3 class="card-text"></h3>
+    </div>
+  </div>
+<% end %>
+<br>
+<% if profile %>
+  <% if profile == "admin" || profile == "profile" %>
+    <h1>История заказа:</h1>
+    <% order.order_status.reverse.each do |status|%>
+      <%= render partial: "orders/order_status", locals: {status: status} %>
+    <% end %>
+  <% end %>
+<% end %>

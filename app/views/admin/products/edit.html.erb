@@ -1,11 +1,22 @@
 <form action = "<%= admin_edit_product_path %>" method = 'post'>
   <h5>Изменить продукт</h5>
-  <input name="product[title]" value="<%= @product.title %>" placeholder="Наименование">
-  <input name="product[price]" value="<%= @product.price %>" placeholder="Цена">
-  <select class="form-select" name="product[tag_id]">
-    <% Tag.all.each do |tag|%>
-      <option <% if tag.id == @product.tag_id %>selected<% end %> value="<%= tag.id %>"> <%= tag.title %></option>
-    <% end %>
-  </select>
-  <input type="submit" name="submit" value="Изменить продукт">
+  <div class="w-50 ">
+    <div class="input-group w-50 mb-3">
+      <span class="input-group-text" id="basic-addon3">Название</span>
+      <input class="form-control" type="text" name="product[title]" value="<%= @product.title %>" placeholder="Наименование">
+    </div>
+    <div class="input-group w-50 mb-3">
+      <span class="input-group-text" id="basic-addon3">Цена</span>
+      <input class="form-control" type="number" name="product[price]" value="<%= @product.price %>" placeholder="Цена">
+    </div>
+    <div class="input-group w-50 mb-3">
+      <span class="input-group-text" id="basic-addon3">Категория</span>
+      <select class="form-select" name="product[tag_id]">
+        <% Tag.all.each do |tag|%>
+          <option <% if tag.id == @product.tag_id %>selected<% end %> value="<%= tag.id %>"> <%= tag.title %></option>
+        <% end %>
+      </select>
+    </div>
+    <input class="btn btn-success" type="submit" name="submit" value="Изменить продукт">
+  </div>
 </form>

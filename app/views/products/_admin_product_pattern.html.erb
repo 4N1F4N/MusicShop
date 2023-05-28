@@ -1,0 +1,12 @@
+<div class="card">
+  <div class="card-body">
+    <h2 class="card-title"><%= product.title %></h2>
+    <h4 class="card-text">Цена: <%= product.price %>р.</h4>
+    <form action="<%= admin_edit_product_path(product)%>" accept-charset="UTF-8" method="get">
+      <div><input type="submit" class="btn btn-primary" name="commit" value="Редактировать продукт"></div>
+    </form>
+    <form action="<%= admin_delete_product_path(product)%>" accept-charset="UTF-8" method="post">
+      <div><input type="submit" class="btn btn-primary" name="commit" value="Удалить продукт"></div>
+    </form>
+  </div>
+</div>

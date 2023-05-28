@@ -1,9 +1,0 @@
-<div class="container justify-content-md-center">
-  <div class="row">
-  <% @products.each do |product| %>
-    <div class="col-4">
-      <%= render partial: "products/product_pattern", locals: {product: product} %>
-    </div>
-  <% end %>
-  </div>
-</div>

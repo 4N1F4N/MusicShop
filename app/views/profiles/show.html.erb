@@ -1,20 +1,21 @@
-<h1><%= @profile.name %></h1>
-<% if @profile.admin? %>
-  <a class="nav-link px-2" href="<%= admin_links_path %>">Админская панель</a>
-<% end %>
-<% if @profile.techstaff? %>
-  <a class="nav-link px-2" href="<%= techstaff_links_path %>">Техническая панель</a>
-<% end %>
+<h1 style="margin: 15px"><%= @profile.name %></h1>
 
-<ul>
-  <% @orders.each do |order| %>
-    <li>
-      <a>Статус: <%= order.order_status.last.title %></a>
-      <a>Id: <%= order.id %></a>
-      <a href="<%= profile_order_path(order.id) %>">Подробная информация</a>
-      <% if order.order_status.last.can_pay %>
-        <a href="<%= pay_order_path(order.id) %>">Оплатить заказ</a>
-      <% end %>
-    </li>
-  <% end %>
-</ul>
+<h1 style="margin: 15px">Ваши заказы:</h1>
+<div class="container justify-content-md-center">
+  <div class="row"> 
+    <% @orders.each do |order| %>
+      <div class="col-4 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Заказ от: <%= order.order_status.last.created_at.strftime("%d-%m-%Y %H:%M") %></h4>
+            <h5 class="card-subtitle mb-3">Статус: <%= order.order_status.last.title %></h5>
+            <a class="btn btn-info mb-1" href="<%= profile_order_path(order.id) %>">Подробная информация</a>
+            <% if order.order_status.last.can_pay %>
+              <a class="btn btn-success" href="<%= pay_order_path(order.id) %>">Оплатить заказ</a>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

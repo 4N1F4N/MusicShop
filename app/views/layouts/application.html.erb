@@ -10,11 +10,16 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   </head>
 
-  <body>
-    <div class="container">
+  <body class="">
+    <div class="container bg-body">
       <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
         
         <div class="col-md-3 mb-2 mb-md-0">
+          <% if session[:profile_id] && Profile.find(session[:profile_id]).admin? %>
+            <a href="<%= admin_links_path %>" class="btn btn-outline-info me-2">Админ. панель</a>
+          <% elsif session[:profile_id] && Profile.find(session[:profile_id]).techstaff? %>
+            <a href="<%= techstaff_links_path %>" class="btn btn-outline-info me-2">Тех. панель</a>
+          <% end %>
           <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
             <svg class="bi" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
           </a>
@@ -28,6 +33,7 @@
 
         <div class="col-md-3 text-end">
           <% if session[:profile_id] %>
+            
             <a href="<%= profile_path %>" class="btn btn-outline-primary me-2">Профиль</a>
             <a href="<%= cart_path %>" class="btn btn-primary me-2">Корзина</a>
             <a href="<%= logout_path %>" class="btn btn-primary">Выйти</a>

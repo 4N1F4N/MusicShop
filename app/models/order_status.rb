@@ -11,7 +11,7 @@ class OrderStatus < ApplicationRecord
   end
 
   def can_cancel
-    self.status_id != 0
+    self.status_id == 1
   end
 
   def can_receive

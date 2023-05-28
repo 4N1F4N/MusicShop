@@ -1,15 +1,9 @@
-      <ul>
+<div class="container justify-content-md-center">
+  <div class="row">
   <% @products.each do |product| %>
-    <li>
-      <a>Имя: <%= product.title %></a>
-      <a>Цена: <%= product.price %></a>
-      <a>Каталог: <%= Tag.find(product.tag_id).title %></a>
-      <form action="<%= admin_edit_product_path(product)%>" accept-charset="UTF-8" method="get">
-        <div><input type="submit" name="commit" value="Редактировать продукт"></div>
-      </form>
-      <form action="<%= admin_delete_product_path(product)%>" accept-charset="UTF-8" method="post">
-        <div><input type="submit" name="commit" value="Удалить продукт"></div>
-      </form>
-    </li>
+    <div class="col-4 mb-3">
+      <%= render partial: "products/admin_product_pattern", locals: {product: product} %>
+    </div>
   <% end %>
-</ul>
+  </div>
+</div>     

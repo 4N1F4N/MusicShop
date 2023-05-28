@@ -3,7 +3,7 @@
 <div class="container justify-content-md-center">
   <div class="row">
   <% @products.each do |product| %>
-    <div class="col-4">
+    <div class="col-4 mb-3">
       <%= render partial: "products/product_pattern", locals: {product: product} %>
     </div>
   <% end %>

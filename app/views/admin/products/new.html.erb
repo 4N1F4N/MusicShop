@@ -1,11 +1,23 @@
 <form action = "<%= admin_new_product_path %>" method = 'post'>
   <h5>Создать продукт</h5>
-  <input type="text" name="product[title]" placeholder="Наименование">
-  <input type="number" name="product[price]" placeholder="Цена">
-  <select class="form-select" name="product[tag_id]">
-    <% Tag.all.each do |tag|%>
-      <option value="<%= tag.id %>"><%= tag.title %></option>
-    <% end %>
-  </select>
-  <input type="submit" name="submit" value="Создать продукт">
+
+  <div class="w-50 ">
+    <div class="input-group w-50 mb-3">
+      <span class="input-group-text" id="basic-addon3">Название</span>
+      <input class="form-control" type="text" name="product[title]" placeholder="Наименование">
+    </div>
+    <div class="input-group w-50 mb-3">
+      <span class="input-group-text" id="basic-addon3">Цена</span>
+      <input class="form-control" type="number" name="product[price]" placeholder="Цена">
+    </div>
+    <div class="input-group w-50 mb-3">
+      <span class="input-group-text" id="basic-addon3">Категория</span>
+      <select class="form-select w-25" name="product[tag_id]">
+        <% Tag.all.each do |tag|%>
+          <option value="<%= tag.id %>"><%= tag.title %></option>
+        <% end %>
+      </select>
+    </div>
+    <input class="btn btn-success" type="submit" name="submit" value="Создать продукт">
+  </div>
 </form>

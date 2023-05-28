@@ -1,0 +1,20 @@
+<div class="card">
+  <div class="card-body">
+    <h3 class="card-title">Последний статус: <%= order.order_status.last.title %></h3>
+    <h4 class="card-text">Время создания: <%= order.created_at.strftime("%d-%m-%Y %H:%M") %></h4>
+    <% if profile %>
+      <% if profile == "tech" %>
+        <a class="btn btn-info" href="<%= techstaff_order_path(order.id) %>">Подробная информация</a>
+        <% if order.order_status.last.can_up %>
+          <a class="btn btn-primary"href="<%= techstaff_edit_order_path(order.id) %>">Изменить</a>
+        <% end %>
+      <% elsif profile == "admin" %>
+        <a class="btn btn-info" href="<%= admin_order_path(order.id) %>">Подробная информация</a>
+        <% if order.order_status.last.can_cancel %>
+          <a class="btn btn-danger" href="<%= admin_order_cancelled_path(order.id) %>">Отменить заказ</a>
+        <% end %>
+      <% elsif profile == "profile" %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

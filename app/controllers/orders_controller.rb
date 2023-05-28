@@ -9,7 +9,7 @@ class OrdersController < ApplicationController
         product.save
       end
       
-      redirect_to profile_path(session[:profile_id])
+      redirect_to profile_order_path(order.id)
     end
   end
 end
